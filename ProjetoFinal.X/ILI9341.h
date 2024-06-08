@@ -6,8 +6,8 @@
      CS     (Chip Select)     --> Ground
      RESET                    --> RC2
      DC/RS  (Command / Data)  --> RC3
-     MOSI   (Serial Data)     --> RB9
-     SCK    (Serial Clock)    --> RB8
+     MOSI   (Serial Data)     --> RG8
+     SCK    (Serial Clock)    --> RG6
      
 */
 

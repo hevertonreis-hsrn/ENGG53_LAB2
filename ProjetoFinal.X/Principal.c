@@ -76,6 +76,13 @@ void setup() {
     INTCONbits.INT2EP = 1;  // Interrupção na borda de subida para INT2
     IEC0bits.INT2IE = 1;    // Habilitar interrupção INT2
     IFS0bits.INT2IF = 0;    // Limpar flag de interrupção INT2
+    
+    // Configurar os pinos do SPI2
+    TRISGbits.TRISG6 = 0; // SCK como saida - FIXO
+    TRISGbits.TRISG8 = 0; // SDI do LCD/SDO do PIC como saida - FIXO
+    TRISCbits.TRISC2 = 0; // RST como saida (configurar conforme necessidade)
+    TRISCbits.TRISC3 = 0; // DC como saida
+    //TRISGbits.TRISG7 = 1; // Habilitar se necessário
 
     // Inicialização do LCD
     SPI2_Initialize();

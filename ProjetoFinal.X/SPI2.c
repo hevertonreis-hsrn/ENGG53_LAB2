@@ -33,8 +33,8 @@ void SPI2_Initialize(void)
     SPI2CONbits.SMP = 1;    // Sample data at end of output time
     SPI2CONbits.MODE16 = 0; // Modo de comunicação 8 bits
 
-    // Baud Rate (Fp = 32MHz, desejado = 1MHz) SPI Clock = Fp/32
-    SPI2BRG = 31;           // Configuração para 1MHz (Baud Rate = Fpb / (2 * (BRG + 1)))
+    // Baud Rate (Fp = 80MHz, desejado = 1MHz) SPI Clock = Fp/2*(BRG + 1)
+    SPI2BRG = 39;           // Configuração para 1MHz (Baud Rate = Fpb / (2 * (BRG + 1)))
 
     // Habilita SPI2 Module
     SPI2CONbits.ON = 1;
