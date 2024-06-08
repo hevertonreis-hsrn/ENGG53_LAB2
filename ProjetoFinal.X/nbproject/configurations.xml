@@ -19,6 +19,13 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>Principal.c</itemPath>
+      <itemPath>SPI2.c</itemPath>
+      <itemPath>SPI2.h</itemPath>
+      <itemPath>ILI9341.h</itemPath>
+      <itemPath>ILI9341.c</itemPath>
+      <itemPath>font.h</itemPath>
+      <itemPath>delay.c</itemPath>
+      <itemPath>delay.h</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
