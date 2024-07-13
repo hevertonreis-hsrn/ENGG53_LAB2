@@ -6,29 +6,26 @@
 #include "delay.h"
 
 // Configurações do clock principal para 80 MHz (8 MHz FRC com PLL)
-#pragma config FPLLMUL = MUL_20       // PLL Multiplier
-#pragma config FPLLIDIV = DIV_2       // PLL Input Divider
-#pragma config FPLLODIV = DIV_1       // PLL Output Divider
-#pragma config FPBDIV = DIV_1         // Peripheral Bus Clock Divider
-#pragma config FWDTEN = OFF           // Watchdog Timer
-#pragma config POSCMOD = OFF          // Primary Oscillator
-#pragma config FNOSC = FRCPLL         // Oscillator Selection
-#pragma config FSOSCEN = OFF          // Secondary Oscillator Enable
-#pragma config ICESEL = ICS_PGx1      // ICE/ICD Comm Channel Select
-#pragma config OSCIOFNC = OFF         // CLKO Enable
+#pragma config FPLLMUL = MUL_20 
+#pragma config FPLLIDIV = DIV_2 
+#pragma config FPLLODIV = DIV_1
+#pragma config POSCMOD = HS
+#pragma config FNOSC = PRIPLL
+#pragma config FPBDIV = DIV_8
+#pragma config FWDTEN = OFF
 
 #define SYS_FREQ (80000000L)          // Frequência do sistema em 80 MHz
 #define VOLTAGE_THRESHOLD 512         // Limite de tensão para acionar o LED2 e o buzzer
+ 
+#define LED1_PIN LATAbits.LATA0       // Define o LED1 no pino RB0
+#define LED2_PIN LATAbits.LATA1       // Define o LED2 no pino RB1
+#define LED3_PIN LATAbits.LATA2       // Define o LED3 no pino RB2
+#define PWR_LED LATAbits.LATA4
 
-// TODO: Definição da pinagem - alterar para os pinos corretos 
-#define LED1_PIN LATBbits.LATB0       // Define o LED1 no pino RB0
-#define LED2_PIN LATBbits.LATB1       // Define o LED2 no pino RB1
-#define LED3_PIN LATBbits.LATB2       // Define o LED3 no pino RB2
-
-#define BUZZER_PIN LATBbits.LATB3     // Define o buzzer no pino RB3
+#define BUZZER_PIN LATAbits.LATA3     // Define o buzzer no pino RB3
 #define BUTTON1_PIN PORTDbits.RD0     // Define o botão 1 no pino RD0 (INT0)
-#define BUTTON2_PIN PORTDbits.RD1     // Define o botão 2 no pino RD1 (INT1)
-#define BUTTON3_PIN PORTDbits.RD2     // Define o botão 3 no pino RD2 (INT2)
+#define BUTTON2_PIN PORTEbits.RE8     // Define o botão 2 no pino RD1 (INT1)
+#define BUTTON3_PIN PORTEbits.RE9     // Define o botão 3 no pino RD2 (INT2)
 
 #define ADC_PIN 0                     // Define o pino ADC no pino AN0
 
@@ -43,8 +40,8 @@ void setup() {
     TRISBbits.TRISB3 = 0;  // Buzzer como saída
 
     TRISDbits.TRISD0 = 1;  // Botão 1 como entrada
-    TRISDbits.TRISD1 = 1;  // Botão 2 como entrada
-    TRISDbits.TRISD2 = 1;  // Botão 3 como entrada
+    TRISEbits.TRISE8 = 1;  // Botão 2 como entrada
+    TRISEbits.TRISE9 = 1;  // Botão 3 como entrada
 
     // Inicialização dos estados dos LEDs e Buzzer
     LED1_PIN = 0;
@@ -81,7 +78,7 @@ void setup() {
     TRISGbits.TRISG6 = 0; // SCK como saida - FIXO
     TRISGbits.TRISG8 = 0; // SDI do LCD/SDO do PIC como saida - FIXO
     TRISCbits.TRISC2 = 0; // RST como saida (configurar conforme necessidade)
-    TRISCbits.TRISC3 = 0; // DC como saida
+    TRISGbits.TRISG9 = 0; // DC como saida
     //TRISGbits.TRISG7 = 1; // Habilitar se necessário
 
     // Inicialização do LCD
@@ -297,9 +294,12 @@ void __ISR(_ADC_VECTOR, IPL7SRS) _ADC1Interrupt(void) {
 }
 
 int main() {
+    
     setup();
     
     setupDisplay();
+    
+    PWR_LED = 1;
 
     while (1) {
         AD1CON1bits.SAMP = 1;  // Iniciar amostragem
