@@ -13,19 +13,21 @@
 
 #include "SPI2.h"
 
-#define DC_ON		PORTCbits.RC3 = 0;
-#define DC_OFF	    PORTCbits.RC3 = 1;
-#define RESET_ON 	PORTCbits.RC2 = 0;
-#define RESET_OFF 	PORTCbits.RC2 = 1; 
+//#define DC_ON		PORTGbits.RG9 = 0;
+//#define DC_OFF	    PORTGbits.RG9 = 1;
+#define DC_ON		PORTGbits.RG13 = 0;
+#define DC_OFF	    PORTGbits.RG13 = 1;
+#define RESET_ON 	PORTGbits.RG14 = 0;
+#define RESET_OFF 	PORTGbits.RG14 = 1; 
 
-//LCD settings
-#define TFT_WIDTH	320
-#define TFT_HEIGHT	240
+//LCD settings - Alterado pro display menor
+#define TFT_WIDTH	160//320 
+#define TFT_HEIGHT	128//240
 
-#define ILI9341_PIXELS              76800U
+#define ILI9341_PIXELS              20480U//76800U
 
-#define MAX_X   239
-#define MAX_Y   319
+#define MAX_X   127//239
+#define MAX_Y   159//319
 
 #define FONT_SPACE	6
 #define FONT_X		8

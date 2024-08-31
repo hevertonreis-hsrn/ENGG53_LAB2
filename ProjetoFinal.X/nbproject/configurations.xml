@@ -20,12 +20,12 @@
                    projectFiles="true">
       <itemPath>Principal.c</itemPath>
       <itemPath>SPI2.c</itemPath>
-      <itemPath>SPI2.h</itemPath>
       <itemPath>ILI9341.h</itemPath>
       <itemPath>ILI9341.c</itemPath>
-      <itemPath>font.h</itemPath>
       <itemPath>delay.c</itemPath>
       <itemPath>delay.h</itemPath>
+      <itemPath>font.h</itemPath>
+      <itemPath>SPI2.h</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
@@ -694,6 +694,7 @@
         <property key="event.recorder.debugger.behavior" value="Running"/>
         <property key="event.recorder.enabled" value="false"/>
         <property key="event.recorder.scvd.files" value=""/>
+        <property key="firmware.download.all" value="false"/>
         <property key="lastid" value=""/>
         <property key="oscillator.auxfrequency" value="120"/>
         <property key="oscillator.auxfrequencyunit" value="Mega"/>

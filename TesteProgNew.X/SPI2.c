@@ -23,33 +23,36 @@ uint32_t SPI2_StatusGet(void);
 // Inicialização do SPI2
 void SPI2_Initialize(void)
 {
-    // Desativa o módulo SPI2
+    // Desativa o modulo SPI2
     SPI2CONbits.ON = 0;
 
     // Configure SPI2 Control Register
-    SPI2CONbits.MSTEN = 1;  // Modo Mestre
-    SPI2CONbits.CKE = 1;    // Transmitir dados na transição de alta para baixa (modo 0,0)
-    SPI2CONbits.CKP = 0;    // Clock idle em baixa
-    SPI2CONbits.SMP = 1;    // Sample data at end of output time
+    SPI2CONbits.MSTEN = 1; // Modo Mestre
+    SPI2CONbits.CKE = 1; // Transmitir dados na transição de alta para baixa (modo 0,0)
+    SPI2CONbits.CKP = 0; // Clock idle em baixa
+    SPI2CONbits.SMP = 1; // Sample data at end of output time
     SPI2CONbits.MODE16 = 0; // Modo de comunicação 8 bits
+    SPI2CONbits.MODE32 = 0;
 
-    // Baud Rate (Fp = 80MHz, desejado = 1MHz) SPI Clock = Fp/2*(BRG + 1)
-    SPI2BRG = 39;           // Configuração para 1MHz (Baud Rate = Fpb / (2 * (BRG + 1)))
+    // Baud Rate (Fp = 80MHz, desejado = 1MHz) SPI Clock = Fp/2(39+1)
+    SPI2BRG = 39;
 
     // Habilita SPI2 Module
     SPI2CONbits.ON = 1;
 }
 
 // Função para enviar um byte via SPI2
-void SPI2_Send(uint8_t data)
-{
-    while (SPI2STATbits.SPITBE == 0); // Aguarda até que o buffer de transmissão esteja vazio
-
+void SPI2_Send(uint8_t data) {
+    
     SPI2BUF = data; // Escreve os dados no buffer de transmissão SPI2
 
-    while (SPI2STATbits.SPIRBE); // Aguarda até que a recepção esteja completa
+    // Aguarda até que a transmissão esteja completa
+    while (SPI2STATbits.SPIRBF == 0) {
+        // Aguarda até que o bit de buffer de recepção esteja cheio
+    }
 
-    (void)SPI2BUF; // Leitura do buffer de recepção para limpar a flag
+    // Limpa o flag de interrupção do SPI2
+    IFS1bits.SPI2EIF = 0; 
 }
 
 // Função para trocar um byte via SPI2

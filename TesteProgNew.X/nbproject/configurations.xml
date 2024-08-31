@@ -4,6 +4,31 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="config" displayName="config" projectFiles="true">
+        <logicalFolder name="default" displayName="default" projectFiles="true">
+          <logicalFolder name="peripheral" displayName="peripheral" projectFiles="true">
+            <logicalFolder name="clk" displayName="clk" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/clk/plib_clk.h</itemPath>
+            </logicalFolder>
+            <logicalFolder name="evic" displayName="evic" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/evic/plib_evic.h</itemPath>
+            </logicalFolder>
+            <logicalFolder name="gpio" displayName="gpio" projectFiles="true">
+              <itemPath>../src/config/default/peripheral/gpio/plib_gpio.h</itemPath>
+            </logicalFolder>
+            <logicalFolder name="spi" displayName="spi" projectFiles="true">
+              <logicalFolder name="spi_master" displayName="spi_master" projectFiles="true">
+                <itemPath>../src/config/default/peripheral/spi/spi_master/plib_spi2_master.h</itemPath>
+                <itemPath>../src/config/default/peripheral/spi/spi_master/plib_spi_master_common.h</itemPath>
+              </logicalFolder>
+            </logicalFolder>
+          </logicalFolder>
+          <itemPath>../src/config/default/definitions.h</itemPath>
+          <itemPath>../src/config/default/toolchain_specifics.h</itemPath>
+          <itemPath>../src/config/default/interrupts.h</itemPath>
+          <itemPath>../src/config/default/device.h</itemPath>
+        </logicalFolder>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -14,6 +39,11 @@
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
                    projectFiles="true">
+      <logicalFolder name="config" displayName="config" projectFiles="true">
+        <logicalFolder name="default" displayName="default" projectFiles="true">
+          <itemPath>../src/config/default/p32MX795F512L.ld</itemPath>
+        </logicalFolder>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -30,6 +60,11 @@
       <itemPath>delay.h</itemPath>
       <itemPath>font.h</itemPath>
       <itemPath>ILI9341.h</itemPath>
+      <itemPath>Teste06.c</itemPath>
+      <itemPath>Teste07-1.c</itemPath>
+      <itemPath>Teste07-2.c</itemPath>
+      <itemPath>CC1101.c</itemPath>
+      <itemPath>CC1101.h</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
@@ -78,12 +113,13 @@
       <C32>
         <property key="additional-warnings" value="true"/>
         <property key="addresss-attribute-use" value="false"/>
+        <property key="appendMe" value=""/>
         <property key="enable-app-io" value="false"/>
         <property key="enable-omit-frame-pointer" value="false"/>
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
-        <property key="extra-include-directories" value=""/>
+        <property key="extra-include-directories" value="../src;../src/config/default"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -133,6 +169,7 @@
         <property key="additional-options-use-response-files" value="false"/>
         <property key="additional-options-write-sla" value="false"/>
         <property key="allocate-dinit" value="false"/>
+        <property key="appendMe" value=""/>
         <property key="code-dinit" value="false"/>
         <property key="ebase-addr" value=""/>
         <property key="enable-check-sections" value="false"/>
@@ -149,13 +186,13 @@
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-cross-reference-file" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
-        <property key="heap-size" value="0"/>
+        <property key="heap-size" value="512"/>
         <property key="input-libraries" value=""/>
         <property key="kseg-length" value=""/>
         <property key="kseg-origin" value=""/>
         <property key="linker-symbols" value=""/>
         <property key="map-file" value="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"/>
-        <property key="no-device-startup-code" value="false"/>
+        <property key="no-device-startup-code" value="true"/>
         <property key="no-startup-files" value="false"/>
         <property key="oXC32ld-extra-opts" value=""/>
         <property key="optimization-level" value=""/>
@@ -172,6 +209,7 @@
       <C32CPP>
         <property key="additional-warnings" value="false"/>
         <property key="addresss-attribute-use" value="false"/>
+        <property key="appendMe" value=""/>
         <property key="check-new" value="false"/>
         <property key="eh-specs" value="true"/>
         <property key="enable-app-io" value="false"/>
@@ -180,7 +218,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exceptions" value="true"/>
         <property key="exclude-floating-point" value="false"/>
-        <property key="extra-include-directories" value=""/>
+        <property key="extra-include-directories" value="../src;../src/config/default"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -833,6 +871,7 @@
         <property key="event.recorder.debugger.behavior" value="Running"/>
         <property key="event.recorder.enabled" value="false"/>
         <property key="event.recorder.scvd.files" value=""/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="lastid" value=""/>
         <property key="memories.aux" value="false"/>
